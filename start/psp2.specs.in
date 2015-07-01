@@ -1,0 +1,31 @@
+%rename cpp old_cpp
+%rename cc1 old_cc1
+%rename cc1plus old_cc1plus
+%rename link old_link
+
+*cpp:
+%(old_cpp) -I%(path)/include
+
+*cc1:
+%(old_cc1) %(cpu)
+
+*cc1plus:
+%(old_cc1plus) -I%(path)/include -I%(path)/include/c++ %(cpu)
+
+*link:
+%(old_link) -q -T%(path)/psp2.x%s -L%(path)/lib
+
+*lib:
+--start-group -lSceKernel_stub -lc_stub -lstdc++_stub -lsupc++ --end-group
+
+*cpu:
+-mcpu=cortex-a9 -mfpu=neon-fp16
+
+*startfile:
+psp2/crt0%O%s
+
+*multilib:
+psp2 !mthumb !mfloat-abi=hard;psp2/thumb mthumb !mfloat-abi=hard;psp2/fpu !mthumb mfloat-abi=hard;
+
+*path:
+@prefix@
