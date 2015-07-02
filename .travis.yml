@@ -5,31 +5,44 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-sudo: false
-
-cache:
-  directories:
-    - $HOME/devkitPro
+sudo: required
 
 before_install:
  - set -e
+
+ - sudo apt-get update -qq -y
+ - sudo apt-get install -qq -y doxygen graphviz
+
  - curl -Ls https://download.sourceforge.net/devkitpro/devkitARMupdate.pl | perl
 
+ - git clone -q --single-branch "https://$TOKEN@github.com/psp2dev/psp2dev.github.io" html
+ - git -C html rm -qrf .
+
 script:
- - export FILE=psp2-libs-dirty-$(git describe --always).zip
+ - export REV=$(git describe --always)
+ - export FILE=psp2-libs-dirty-$REV.zip
 
  - aclocal
  - automake --add-missing
  - autoconf
 
  - ./configure -q --host=arm-none-eabi --with-silent-rules --with-multilib=$PWD --prefix="$PREFIX"
+ - doxygen
  - make install -j4
 
- - cd $PREFIX
+ - pushd $PREFIX
  - zip -0rq $FILE *
 
 after_success:
  - curl -q -T $FILE -u $FTP ftp://wololo.net/
+ - popd
+
+ - cd html
+ - git add -f .
+ - git config user.name "Travis CI"
+ - git config user.email contact@travis-ci.com
+ - git commit --amend -am "Deploy $REV to Github Pages"
+ - git push -fq origin
 
 env:
  global:
@@ -38,3 +51,4 @@ env:
   - PATH="$PATH:$DEVKITARM/bin"
   - PREFIX="$PWD/dist"
   - secure: "kq7O++vhNMeoQ+u8eZLk0aRqrKTgHZQnkvgNm+H8/2Ar9R8+wN6SjxT3aRuYL9NX7Bo0UXZMCsTrNTwpRswhwhASk2YUS6jNElKUBJmAVn5NEBdXRGNiJ1xINCd69PCtxLiSpXG5kFcdmYJRbJgNiSlrvwoJVkVwMfzjbch2GEq2tGuaV7jNCNTptk87fgjLqzDLXuEg0qwPCDKy/LW2Biw1dTdgOr3xK4qphhT4UtmOwMOPEOwkfU3S978SFxcZPUKBNei1nJEnfPlYqNuTjROcUdY4nVxmdWanA9OdxZSQY1n5f+4hkmwRXzR92JWLWmP+7kLnKGHoMPFMwKLonxyVuJgc53h4yQ4UtsybiQulA+CniT9nTkMI7/gQQXQejIbnmKVcpDAzcIDukr+ww0AxjCjvrLKlMJOOAbT/ecIdvHZ9brAH0sbE1IYVx7rENh5itE/kbbivlAm/6OaZFYpM2n6YRUf1KLzAKX482TUH+niJbKSffZD8iKxc73a91tM+SyduEsWbNUPzNK4RRnLsA3234cM26ErqnuOyWuflKyzrUWX6cAM9CkC8nNXJDSQZ3XGyI/UaBmvYPBby6XM4qXnQh0Hr7E62ZAoXxLeFsDHeze5SJIxKkZWz+dZbUaT2a1HvE4NtwkRE6vPYnz/DnXgcLMcB/CmozUR53sc="
+  - secure: "PO248xZbwOlZuJ46dOwlzJ50p8gLO8iQBpfnsfih5uRfXAx2swff9oMf2R/TDvznA3MCrcXWLz1kCh83Bqr7JPkslYSDDCxtA+kPvEoIzXabm+DdutaXobkcjpjHPf4OA/klg/KBCO+JkYZCK7vjacTV44RAxt9UtuImJNUN52ji6VMCb4LYXmfF+m+xjmGVd5nux9IJQb+r1i5TffoaZHVMkqNV3ZV6qynQPCJNGlWAJsMcVvQIvJX3DGvFMXDsMwmlm2nK/cvzt+LkIDzP1P6hNEtSxIYW5/uNpnVzK9kuCFvXoJ8yIAIn4XI8M7iOXDahGG2ONvWro3XwT9zNcvyKKTkLpB1bfAFIDKPOV7W5pZoOIyNl0Vuu4QG/ITGQxfz71CzknV0NhrhBGoQrWpIbXozPzHhRl1OBogpYOjKKOb3JWBV0mgly9x3Xy8Ey9fYjIMJRxBjqg9zL+WXcFfM/PGcxlRL1jc7AbeiEMy3zgYMwUL/JTmwngm9cq1uJx5DOkMMeHMkt/3FRv5O+DHZGHeAXIvekQ0dDwUZrh2HbYLRWPqr/XjSIWMPpMcHT8gmJvAvPbx3YQISrd0kpZ8bDG1GixGAXyQs9kMpHPRFcWNGrzgV+OVgqyFCPrlqIADcV28hRcMDTfU2aPE41jN4++GMkcmYsXYq59UUx8p4="
