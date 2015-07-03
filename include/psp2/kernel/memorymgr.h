@@ -18,12 +18,14 @@
 extern "C" {
 #endif
 
+typedef int SceKernelMemBlockType;
+
 enum {
-	SCE_KERNEL_MEMBLOCK_TYPE_USER_RW	= 0x0c20d060,
-	SCE_KERNEL_MEMBLOCK_TYPE_USER_RW_UNCACHE	= 0x0c208060,
-	SCE_KERNEL_MEMBLOCK_TYPE_USER_MAIN_PHYCONT_RW	= 0x0c80d060,
-	SCE_KERNEL_MEMBLOCK_TYPE_USER_MAIN_PHYCONT_NC_RW	= 0x0d808060,
-	SCE_KERNEL_MEMBLOCK_TYPE_USER_CDRAM_RW	= 0x09408060
+	SCE_KERNEL_MEMBLOCK_TYPE_USER_RW                 = 0x0c20d060,
+	SCE_KERNEL_MEMBLOCK_TYPE_USER_RW_UNCACHE         = 0x0c208060,
+	SCE_KERNEL_MEMBLOCK_TYPE_USER_MAIN_PHYCONT_RW    = 0x0c80d060,
+	SCE_KERNEL_MEMBLOCK_TYPE_USER_MAIN_PHYCONT_NC_RW = 0x0d808060,
+	SCE_KERNEL_MEMBLOCK_TYPE_USER_CDRAM_RW           = 0x09408060
 };
 
 /***
@@ -36,7 +38,7 @@ enum {
  *
  * @return SceUID of the memory block on success, < 0 on error.
 */
-SceUID sceKernelAllocMemBlock(const char *name, int type, int size, void *optp);
+SceUID sceKernelAllocMemBlock(const char *name, SceKernelMemBlockType type, int size, void *optp);
 
 /***
  * Frees new memoy block
