@@ -16,11 +16,13 @@ nobase_include_HEADERS = psp2/export.s psp2/import.S	\
 	psp2/touch.h psp2/types.h	\
 	c++/bits/os_defines.h c++/bits/time_members.h c++/bits/c++io.h	\
 	c++/bits/atomic_word.h c++/bits/c++locale.h c++/bits/locale_facets.h	\
-	c++/bits/ctype_base.h c++/bits/stdc++.h c++/bits/gthr-default.h	\
-	c++/bits/messages_members.h c++/bits/gthr-single.h	\
-	c++/bits/c++allocator.h c++/bits/gthr.h	c++/bits/cpu_defines.h	\
-	c++/bits/opt_random.h c++/bits/basic_file.h c++/bits/cxxabi_tweaks.h	\
-	c++/bits/ctype_inline.h c++/bits/extc++.h c++/bits/gthr-posix.h	\
-	c++/bits/error_constants.h c++/bits/stdtr1c++.h	c++/bits/c++config.h	\
-	sys/stdio.h	\
+	c++/bits/locale_facets.tcc c++/bits/ctype_base.h c++/bits/stdc++.h	\
+	c++/bits/gthr-default.h	c++/bits/messages_members.h	\
+	c++/bits/gthr-single.h c++/bits/c++allocator.h c++/bits/gthr.h	\
+	c++/bits/cpu_defines.h c++/bits/opt_random.h c++/bits/basic_file.h	\
+	c++/bits/cxxabi_tweaks.h c++/bits/ctype_inline.h c++/bits/extc++.h	\
+	c++/bits/gthr-posix.h c++/bits/error_constants.h c++/bits/stdtr1c++.h	\
+	c++/bits/c++config.h c++/bits/basic_ios.h c++/bits/basic_ios.tcc	\
+	c++/bits/ios_base.h	\
+	c++/streambuf sys/stdio.h	\
 	alloca.h errno.h malloc.h stdio.h stdlib.h string.h wchar.h
