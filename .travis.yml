@@ -19,8 +19,8 @@ before_install:
  - git -C html rm -qrf .
 
 script:
- - export REV=$(git describe --always)
- - export FILE=psp2-libs-dirty-$REV.zip
+ - export REV=dirty-$(git describe --always)
+ - export FILE=psp2-libs-$REV.zip
 
  - aclocal
  - automake --add-missing
@@ -41,8 +41,8 @@ after_success:
  - git add -f .
  - git config user.name "Travis CI"
  - git config user.email contact@travis-ci.com
- - git commit --amend -am "Deploy $REV to Github Pages"
- - git push -fq origin
+ - git commit -qam $REV
+ - git push -q origin
 
 env:
  global:
