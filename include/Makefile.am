@@ -27,4 +27,4 @@ nobase_include_HEADERS = psp2/export.s psp2/import.S	\
 	c++/ext/new_allocator.h c++/ext/rc_string_base.h	\
 	c++/ext/sso_string_base.h c++/ext/throw_allocator.h	\
 	c++/stdexcept c++/streambuf sys/stdio.h	\
-	alloca.h errno.h malloc.h stdio.h stdlib.h string.h wchar.h
+	alloca.h errno.h malloc.h math.h stdio.h stdlib.h string.h wchar.h
