@@ -459,7 +459,7 @@ PSP2_IMPORT_FUNC SceLibstdcxx, 0001, F00, 0xe3cd321d, _Atomic_flag_test_and_set
 PSP2_IMPORT_FUNC SceLibstdcxx, 0001, F00, 0xe449e2bf, _ZNSt15basic_streambufIcSt11char_traitsIcEED1Ev
 PSP2_IMPORT_FUNC SceLibstdcxx, 0001, F00, 0xe4bd5e6a, _ZTv0_n12_NSdD0Ev
 PSP2_IMPORT_FUNC SceLibstdcxx, 0001, F00, 0xe5a3bf8c, _Cnd_register_at_thread_exit
-PSP2_IMPORT_FUNC SceLibstdcxx, 0001, F00, 0xe6356c5c, _ZNSt11logic_errorC2ERKSs
+PSP2_IMPORT_FUNC_WITH_ALIAS SceLibstdcxx, 0001, F00, 0xe6356c5c, _ZNSt11logic_errorC2ERKSs, _ZNSt11logic_errorC1ERKSs
 PSP2_IMPORT_FUNC SceLibstdcxx, 0001, F00, 0xe67722c3, _ZN10__cxxabiv120__si_class_type_infoD0Ev
 PSP2_IMPORT_FUNC SceLibstdcxx, 0001, F00, 0xe67f3768, _ZNSt14overflow_errorC1ERKS_
 PSP2_IMPORT_FUNC SceLibstdcxx, 0001, F00, 0xe777348c, _ZNSt13basic_filebufIwSt11char_traitsIwEE5uflowEv
