@@ -23,6 +23,8 @@ nobase_include_HEADERS = psp2/export.s psp2/import.S	\
 	c++/bits/cxxabi_tweaks.h c++/bits/ctype_inline.h c++/bits/extc++.h	\
 	c++/bits/gthr-posix.h c++/bits/error_constants.h c++/bits/stdtr1c++.h	\
 	c++/bits/c++config.h c++/bits/basic_ios.h c++/bits/basic_ios.tcc	\
-	c++/bits/ios_base.h	\
-	c++/streambuf sys/stdio.h	\
+	c++/bits/basic_string.h c++/bits/basic_string.tcc c++/bits/ios_base.h	\
+	c++/ext/new_allocator.h c++/ext/rc_string_base.h	\
+	c++/ext/sso_string_base.h c++/ext/throw_allocator.h	\
+	c++/stdexcept c++/streambuf sys/stdio.h	\
 	alloca.h errno.h malloc.h stdio.h stdlib.h string.h wchar.h

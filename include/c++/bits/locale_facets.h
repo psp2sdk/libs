@@ -1,6 +1,6 @@
 // Locale support -*- C++ -*-
 
-// Copyright (C) PSP2SDK Project
+// Copyright (C) 2015 PSP2SDK Project
 // Modified for PSP2 by PSP2SDK Team
 
 // Copyright (C) 1997-2014 Free Software Foundation, Inc.
