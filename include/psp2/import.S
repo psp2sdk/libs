@@ -31,7 +31,7 @@ _\name\()_stub_str:
 #endif
 .endm
 
-.macro PSP2_IMPORT_FUNC module, moduleNum, num, nid, name
+.macro PSP2_IMPORT_FUNC_WITH_ALIAS module, moduleNum, num, nid, name, alias
 #ifdef NIDS
 	.global	_NID_\name
 _NID_\name = \nid
@@ -57,12 +57,20 @@ _NID_\name = \nid
 	.align	2
 	.global	\name
 	.type	\name, %function
+.if \alias != NULL
+	.global	\alias
+	.type	\alias, %function
+\alias:
+.endif
 \name:
 	mvn	r0, #0
 	bx	lr
 	nop
 	.word	0
 	.size	\name, .-\name
+.if \alias != NULL
+	.size	\alias, .-\alias
+.endif
 
 	.section .sce_libgen_mark, "", %progbits
 	.align	2
@@ -73,6 +81,10 @@ _NID_\name = \nid
 	.word	_NID_\name
 .endif
 #endif
+.endm
+
+.macro PSP2_IMPORT_FUNC module, moduleNum, num, nid, name
+	PSP2_IMPORT_FUNC_WITH_ALIAS \module, \moduleNum, \num, \nid, \name, NULL
 .endm
 
 .macro PSP2_IMPORT_VAR module, moduleNum, num, nid, name
@@ -115,17 +127,6 @@ _NID_\name = \nid
 	.word	\name
 	.word	\nid
 	.word	_NID_\name
-.endif
-#endif
-.endm
-
-.macro PSP2_IMPORT_FUNC_WITH_ALIAS module, moduleNum, num, nid, name, alias
-	PSP2_IMPORT_FUNC module, moduleNum, num, nid, name
-#ifdef FUNC
-.if FUNC == \nid
-	.global	\alias
-	.type	\alias, %function
-\alias = \funcname
 .endif
 #endif
 .endm
