@@ -358,7 +358,7 @@ PSP2_IMPORT_FUNC SceLibstdcxx, 0001, F00, 0xabb11cf9, _ZNSt6_WinitC1Ev
 PSP2_IMPORT_FUNC SceLibstdcxx, 0001, F00, 0xabe96e40, _ZNSt15basic_streambufIwSt11char_traitsIwEE6xsgetnEPwi
 PSP2_IMPORT_FUNC SceLibstdcxx, 0001, F00, 0xabfbb0b4, _ZThn8_NSdD1Ev
 PSP2_IMPORT_FUNC SceLibstdcxx, 0001, F00, 0xacd6d901, _ZN10__cxxabiv120__si_class_type_infoD2Ev
-PSP2_IMPORT_FUNC SceLibstdcxx, 0001, F00, 0xae42c1d5, __snc_personality_v0
+PSP2_IMPORT_FUNC_WITH_ALIAS SceLibstdcxx, 0001, F00, 0xae42c1d5, __snc_personality_v0, __gxx_personality_v0
 PSP2_IMPORT_FUNC SceLibstdcxx, 0001, F00, 0xae85c2ee, _ZNKSt13runtime_error4whatEv
 PSP2_IMPORT_FUNC SceLibstdcxx, 0001, F00, 0xaf5df8c3, _ZNSt10istrstreamD2Ev
 PSP2_IMPORT_FUNC SceLibstdcxx, 0001, F00, 0xaf7a7081, _ZNSt9exceptionD2Ev
