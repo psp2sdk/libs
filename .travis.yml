@@ -15,7 +15,7 @@ before_install:
 
  - curl -Ls https://download.sourceforge.net/devkitpro/devkitARMupdate.pl | perl
 
- - git clone -q --single-branch "https://$TOKEN@github.com/psp2dev/psp2dev.github.io" html
+ - git clone -q --single-branch "https://$TOKEN@github.com/psp2sdk/psp2sdk.github.io" html
  - git -C html rm -qrf .
 
 script:
