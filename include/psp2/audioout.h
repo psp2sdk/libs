@@ -90,7 +90,7 @@ int sceAudioOutOutput(int port, const void *buf);
 #define PSP2_AUDIO_VOLUME_0DB  PSP2_AUDIO_OUT_MAX_VOL	//!< Maximum output port volume
 
 /** Flags to use as 'ch' argument for ::sceAudioOutSetVolume */
-enum AudioOutChannelFlag {
+enum {
 	PSP2_AUDIO_VOLUME_FLAG_L_CH	= 0x1, //!< Left Channel
 	PSP2_AUDIO_VOLUME_FLAG_R_CH	= 0x2  //!< Right Channel
 };
@@ -120,7 +120,7 @@ int sceAudioOutSetVolume(int port, int ch, int *vol);
 int sceAudioOutSetConfig(int port, int len, int freq, int mode);
 
 /** Config type values to specify to ::sceAudioOutGetConfig */
-enum AudioOutConfigType {
+enum {
 	PSP2_AUDIO_OUT_CONFIG_TYPE_LEN	= 0,
 	PSP2_AUDIO_OUT_CONFIG_TYPE_FREQ	= 1,
 	PSP2_AUDIO_OUT_CONFIG_TYPE_MODE	= 2

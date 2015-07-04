@@ -16,7 +16,7 @@ extern "C" {
 #endif
 
 /** Net Error Codes */
-enum NetErrorCodes {
+enum {
 	PSP2_NET_ERROR_EPERM					= 0x80410101,
 	PSP2_NET_ERROR_ENOENT					= 0x80410102,
 	PSP2_NET_ERROR_ESRCH					= 0x80410103,
@@ -137,7 +137,7 @@ enum NetErrorCodes {
 };
 
 /** Specific kernel and libnet error codes */
-enum ENetErrorCodes {
+enum {
 	PSP2_NET_EPERM				= 1,
 	PSP2_NET_ENOENT				= 2,
 	PSP2_NET_ESRCH				= 3,
@@ -238,7 +238,7 @@ enum ENetErrorCodes {
 
 
 /** libnet specific error codes */
-enum libnetErrorCodes {
+enum {
 	PSP2_NET_ENOTINIT	= 200,
 	PSP2_NET_ENOLIBMEM,
 	PSP2_NET_ETLS,
@@ -248,7 +248,7 @@ enum libnetErrorCodes {
 };
 
 /** Resolver specific error codes */
-enum NetResolverErrorCodes {
+enum {
 	PSP2_NET_RESOLVER_EINTERNAL	= 220,
 	PSP2_NET_RESOLVER_EBUSY,
 	PSP2_NET_RESOLVER_ENOSPACE,
@@ -267,7 +267,7 @@ enum NetResolverErrorCodes {
 };
 
 /** Flags to specify as argument to ::sceNetDumpRead() */
-enum NetDumpFlags {
+enum {
 	PSP2_NET_DUMP_PEEK						= 0x00000010,
 	PSP2_NET_DUMP_DONTWAIT					= 0x00000020,
 	PSP2_NET_DUMP_OVERFLOW					= 0x00000040,
@@ -275,7 +275,7 @@ enum NetDumpFlags {
 };
 
 /** Events for ::SceNetEpollEvent */
-enum NetEpollEvents {
+enum {
 	PSP2_NET_EPOLLIN		= 0x00000001,
 	PSP2_NET_EPOLLOUT		= 0x00000002,
 	PSP2_NET_EPOLLERR		= 0x00000008,
@@ -284,14 +284,14 @@ enum NetEpollEvents {
 };
 
 /** Flags to specify as argument to ::sceNetEpollControl() */
-enum NetEpollControlFlags {
+enum {
 	PSP2_NET_EPOLL_CTL_ADD = 1,
 	PSP2_NET_EPOLL_CTL_MOD,
 	PSP2_NET_EPOLL_CTL_DEL
 };
 
 /** state for ::SceNetSockInfo structure */
-enum NetSockInfoStates {
+enum {
 	PSP2_NET_SOCKINFO_STATE_UNKNOWN,
 	PSP2_NET_SOCKINFO_STATE_CLOSED,
 	PSP2_NET_SOCKINFO_STATE_OPENED,
@@ -308,7 +308,7 @@ enum NetSockInfoStates {
 };
 
 /** flags for ::SceNetSockInfo structure */
-enum NetSockInfoFlags {
+enum {
 	PSP2_NET_SOCKINFO_F_SELF			= 0x00000001,
 	PSP2_NET_SOCKINFO_F_KERNEL			= 0x00000002,
 	PSP2_NET_SOCKINFO_F_OTHERS			= 0x00000004,
@@ -321,31 +321,31 @@ enum NetSockInfoFlags {
 };
 
 /** Flags to specify as argument to ::sceNetEmulationGet() / ::sceNetEmulationSet() */
-enum NetEmuFlags {
+enum {
 	PSP2_NET_EMULATION_FLAG_ETH0	= 1,
 	PSP2_NET_EMULATION_FLAG_WLAN0
 };
 
 /** Flags to specify as argument to ::sceNetResolverStartNtoa() / ::sceNetResolverStartAton() */
-enum NetResolverStartFlags {
+enum {
 	PSP2_NET_RESOLVER_ASYNC							= 0x00000001,
 	PSP2_NET_RESOLVER_START_NTOA_DISABLE_IPADDRESS	= 0x00010000
 };
 
 /** Flags to specify as argument to ::sceNetResolverAbort() */
-enum NetResolverAbortFlags {
+enum {
 	PSP2_NET_RESOLVER_ABORT_FLAG_NTOA_PRESERVATION	= 0x00000001,
 	PSP2_NET_RESOLVER_ABORT_FLAG_ATON_PRESERVATION	= 0x00000002
 };
 
 /** Flags to specify as argument to ::sceNetSocketAbort() */
-enum NetSocketAbortFlags {
+enum {
 	PSP2_NET_SOCKET_ABORT_FLAG_RCV_PRESERVATION	= 0x00000001,
 	PSP2_NET_SOCKET_ABORT_FLAG_SND_PRESERVATION	= 0x00000002
 };
 
 /** Net Protocols */
-enum NetProtocols {
+enum {
 	PSP2_NET_IPPROTO_IP		= 0,
 	PSP2_NET_IPPROTO_ICMP	= 1,
 	PSP2_NET_IPPROTO_IGMP	= 2,
@@ -355,7 +355,7 @@ enum NetProtocols {
 };
 
 /** Socket Options */
-enum NetSocketOptions {
+enum {
 	/* IP */
 	PSP2_NET_IP_HDRINCL				= 2,
 	PSP2_NET_IP_TOS					= 3,
@@ -395,7 +395,7 @@ enum NetSocketOptions {
 };
 
 /** Socket types */
-enum NetSocketTypes {
+enum {
 	PSP2_NET_SOCK_STREAM		= 1,
 	PSP2_NET_SOCK_DGRAM			= 2,
 	PSP2_NET_SOCK_RAW			= 3,
@@ -404,7 +404,7 @@ enum NetSocketTypes {
 };
 
 /** MSG Flags */
-enum NetMsgFlags {
+enum {
 	PSP2_NET_MSG_PEEK			= 0x00000002,
 	PSP2_NET_MSG_WAITALL		= 0x00000040,
 	PSP2_NET_MSG_DONTWAIT		= 0x00000080,
@@ -413,14 +413,14 @@ enum NetMsgFlags {
 };
 
 /** Flags to specify as argument to ::sceNetShutdown() */
-enum NetShutdownFlags {
+enum {
 	PSP2_NET_SHUT_RD,
 	PSP2_NET_SHUT_WR,
 	PSP2_NET_SHUT_RDWR
 };
 
 /** Types to specify to ::SceNetIcmpHeader structure */
-enum NetIcmpHeaderTypes {
+enum {
 	PSP2_NET_ICMP_TYPE_ECHO_REPLY			= 0,
 	PSP2_NET_ICMP_TYPE_DEST_UNREACH			= 3,
 	PSP2_NET_ICMP_TYPE_SOURCE_QUENCH		= 4,
@@ -437,7 +437,7 @@ enum NetIcmpHeaderTypes {
 };
 
 /** Codes to specify to ::SceNetIcmpHeader structure */
-enum NetIcmpHeaderCodes {
+enum {
 	PSP2_NET_ICMP_CODE_DEST_UNREACH_NET_UNREACH				= 0,
 	PSP2_NET_ICMP_CODE_DEST_UNREACH_HOST_UNREACH			= 1,
 	PSP2_NET_ICMP_CODE_DEST_UNREACH_PROTO_UNREACH			= 2,

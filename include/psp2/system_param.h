@@ -74,7 +74,7 @@ enum {
 };
 
 /* Username */
-#define SYSTEM_PARAM_USERNAME_MAXSIZE	(17) //!< Max size of username
+#define PSP2_SYSTEM_PARAM_USERNAME_MAXSIZE	(17) //!< Max size of username
 
 /* Date display format */
 enum {
@@ -85,8 +85,8 @@ enum {
 
 /* Time display format */
 enum {
-	SYSTEM_PARAM_TIME_FORMAT_12HR, //!< 12-hour clock
-	SYSTEM_PARAM_TIME_FORMAT_24HR //!< 24-hour clock
+	PSP2_SYSTEM_PARAM_TIME_FORMAT_12HR, //!< 12-hour clock
+	PSP2_SYSTEM_PARAM_TIME_FORMAT_24HR //!< 24-hour clock
 };
 
 #endif
