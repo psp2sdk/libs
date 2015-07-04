@@ -14,13 +14,6 @@ AM_INIT_AUTOMAKE(foreign -Wno-portability)
 AC_ARG_WITH(multilib, AS_HELP_STRING(--with-multilib Specify multilib directory),
 	AC_SUBST(multilibdir, $withval), AC_MSG_ERROR(Specify --with-multilib))
 
-AC_ARG_WITH(silent-rules,
-	AS_HELP_STRING(--with-silent-rules Enable silent rules),
-	silent=yes)
-if test "$silent"=yes; then
-	AM_SILENT_RULES(yes)
-fi
-
 # Checks for programs.
 AC_PROG_CC
 AC_PROG_RANLIB
