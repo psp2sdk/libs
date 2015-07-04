@@ -15,7 +15,7 @@ before_install:
 
  - curl -Ls https://download.sourceforge.net/devkitpro/devkitARMupdate.pl | perl
 
- - git clone -q --single-branch "https://$TOKEN@github.com/psp2sdk/psp2sdk.github.io" html
+ - git clone -q --single-branch "https://$TOKEN@github.com/psp2sdk/psp2sdk.github.io" html | sed s/$TOKEN/\${TOKEN}/g
  - git -C html rm -qrf .
 
 script:
@@ -42,7 +42,7 @@ after_success:
  - git config user.name "Travis CI"
  - git config user.email contact@travis-ci.com
  - git commit -qam $REV
- - git push -q origin
+ - git push -q origin | sed s/$TOKEN/\${TOKEN}/g
 
 env:
  global:
