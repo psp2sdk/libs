@@ -12,6 +12,8 @@
 #ifndef _PSP2_IO_FCNTL_H_
 #define _PSP2_IO_FCNTL_H_
 
+#include <psp2/types.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
