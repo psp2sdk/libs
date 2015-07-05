@@ -5,6 +5,9 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+# 2.64 fails AC_PROG_CC with -notstdlib
+AC_PREREQ(2.65)
+
 AC_INIT(PSP2SDK, dirty-m4_esyscmd_s([git describe --always]),
 	https://github.com/173210/psp2sdk/issues)
 AC_CONFIG_SRCDIR(include/psp2/moduleinfo.h)
@@ -21,7 +24,7 @@ if test "$RANLIB" = :; then
 	AC_MSG_ERROR(ranlib not found.)
 fi
 
-CFLAGS="$CFLAGS -Wall -I\$(top_srcdir)/include -mcpu=cortex-a9 -mfpu=neon-fp16"
+CFLAGS="$CFLAGS -Wall -nostdlib -I\$(top_srcdir)/include -mcpu=cortex-a9 -mfpu=neon-fp16"
 
 AC_CHECK_TOOL(AR, ar, :)
 AM_PROG_AS
