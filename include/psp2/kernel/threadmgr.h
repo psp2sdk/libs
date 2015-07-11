@@ -167,21 +167,23 @@ int sceKernelExitDeleteThread(int status);
   * Wait until a thread has ended.
   *
   * @param thid - Id of the thread to wait for.
+  * @param stat - Exit status.
   * @param timeout - Timeout in microseconds (assumed).
   *
   * @return < 0 on error.
   */
-int sceKernelWaitThreadEnd(SceUID thid, SceUInt *timeout);
+int sceKernelWaitThreadEnd(SceUID thid, int stat, SceUInt *timeout);
 
 /**
   * Wait until a thread has ended and handle callbacks if necessary.
   *
   * @param thid - Id of the thread to wait for.
+  * @param stat - Exit status.
   * @param timeout - Timeout in microseconds (assumed).
   *
   * @return < 0 on error.
   */
-int sceKernelWaitThreadEndCB(SceUID thid, SceUInt *timeout);
+int sceKernelWaitThreadEndCB(SceUID thid, int stat, SceUInt *timeout);
 
 /**
   * Delay the current thread by a specified number of microseconds
