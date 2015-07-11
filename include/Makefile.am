@@ -7,8 +7,8 @@
 nobase_include_HEADERS = psp2/export.s psp2/import.S	\
 	psp2/io/devctl.h psp2/io/dirent.h psp2/io/fcntl.h psp2/io/stat.h	\
 	psp2/net/http.h psp2/net/net.h psp2/net/netctl.h	\
-	psp2/kernel/error.h psp2/kernel/processmgr.h psp2/kernel/memorymgr.h	\
-	psp2/kernel/loadcore.h psp2/kernel/threadmgr.h	\
+	psp2/kernel/error.h psp2/kernel/modulemgr.h psp2/kernel/processmgr.h	\
+	psp2/kernel/sysmem.h psp2/kernel/loadcore.h psp2/kernel/threadmgr.h	\
 	psp2/audioenc.h psp2/audioin.h psp2/audioout.h	\
 	psp2/appmgr.h psp2/apputil.h psp2/camera.h psp2/ctrl.h psp2/display.h	\
 	psp2/fpu.h psp2/gxm.h psp2/moduleinfo.h psp2/motion.h psp2/pgf.h	\

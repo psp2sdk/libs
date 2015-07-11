@@ -9,8 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-#ifndef _PSP2_KERNEL_MEMORYMGR_H_
-#define _PSP2_KERNEL_MEMORYMGR_H_
+#ifndef _PSP2_KERNEL_SYSMEM_H_
+#define _PSP2_KERNEL_SYSMEM_H_
 
 #include <psp2/types.h>
 
@@ -21,11 +21,11 @@ extern "C" {
 typedef int SceKernelMemBlockType;
 
 enum {
-	SCE_KERNEL_MEMBLOCK_TYPE_USER_RW                 = 0x0c20d060,
-	SCE_KERNEL_MEMBLOCK_TYPE_USER_RW_UNCACHE         = 0x0c208060,
-	SCE_KERNEL_MEMBLOCK_TYPE_USER_MAIN_PHYCONT_RW    = 0x0c80d060,
-	SCE_KERNEL_MEMBLOCK_TYPE_USER_MAIN_PHYCONT_NC_RW = 0x0d808060,
-	SCE_KERNEL_MEMBLOCK_TYPE_USER_CDRAM_RW           = 0x09408060
+	SCE_KERNEL_MEMBLOCK_TYPE_USER_RW	= 0x0c20d060,
+	SCE_KERNEL_MEMBLOCK_TYPE_USER_RW_UNCACHE	= 0x0c208060,
+	SCE_KERNEL_MEMBLOCK_TYPE_USER_MAIN_PHYCONT_RW	= 0x0c80d060,
+	SCE_KERNEL_MEMBLOCK_TYPE_USER_MAIN_PHYCONT_NC_RW	= 0x0d808060,
+	SCE_KERNEL_MEMBLOCK_TYPE_USER_CDRAM_RW	= 0x09408060
 };
 
 /***
@@ -59,9 +59,10 @@ int sceKernelFreeMemBlock(SceUID uid);
 */
 int sceKernelGetMemBlockBase(SceUID uid, void **basep);
 
+SceUID sceKernelFindMemBlockByAddr(const void *, int);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* _PSP2_KERNEL_MEMORYMGR_H_ */
+#endif
