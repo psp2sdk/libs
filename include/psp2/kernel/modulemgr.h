@@ -46,6 +46,7 @@ typedef struct
 	SceUInt type;	//< 6 = user-mode PRX?
 } Psp2LoadedModuleInfo;
 
+int sceKernelGetModuleList(int, SceUID *, unsigned int *);
 int sceKernelGetModuleInfo(SceUID, Psp2LoadedModuleInfo *);
 SceUID sceKernelLoadModule(const char *path, int flags, int *res);
 int sceKernelUnloadModule(SceUID);
