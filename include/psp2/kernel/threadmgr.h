@@ -172,7 +172,7 @@ int sceKernelExitDeleteThread(int status);
   *
   * @return < 0 on error.
   */
-int sceKernelWaitThreadEnd(SceUID thid, int stat, SceUInt *timeout);
+int sceKernelWaitThreadEnd(SceUID thid, int *stat, SceUInt *timeout);
 
 /**
   * Wait until a thread has ended and handle callbacks if necessary.
@@ -183,7 +183,7 @@ int sceKernelWaitThreadEnd(SceUID thid, int stat, SceUInt *timeout);
   *
   * @return < 0 on error.
   */
-int sceKernelWaitThreadEndCB(SceUID thid, int stat, SceUInt *timeout);
+int sceKernelWaitThreadEndCB(SceUID thid, int *stat, SceUInt *timeout);
 
 /**
   * Delay the current thread by a specified number of microseconds
