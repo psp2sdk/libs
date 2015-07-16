@@ -40,6 +40,8 @@ enum {
 */
 SceUID sceKernelAllocMemBlock(const char *name, SceKernelMemBlockType type, int size, void *optp);
 
+SceUID sceKernelAllocMemBlockForVM(const char *, SceSize);
+
 /***
  * Frees new memoy block
  *
@@ -60,6 +62,10 @@ int sceKernelFreeMemBlock(SceUID uid);
 int sceKernelGetMemBlockBase(SceUID uid, void **basep);
 
 SceUID sceKernelFindMemBlockByAddr(const void *, int);
+
+void sceKernelSyncVMDomain(SceUID, void *, SceSize);
+void sceKernelOpenVMDomain();
+void sceKernelCloseVMDomain();
 
 #ifdef __cplusplus
 }
