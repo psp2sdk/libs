@@ -13,6 +13,10 @@ addons:
    - doxygen
    - graphviz
 
+cache:
+ directories:
+   - $HOME/devkitPro
+
 before_install:
  - set -e
 
