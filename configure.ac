@@ -29,19 +29,6 @@ CFLAGS="$CFLAGS -Wall -nostdlib -I\$(top_srcdir)/include -mcpu=cortex-a9 -mfpu=n
 AC_CHECK_TOOL(AR, ar, :)
 AM_PROG_AS
 
-# Checks for header files.
-AC_CHECK_HEADERS(stddef.h stdint.h, , AC_MSG_ERROR(header files not found.))
-
-# Checks for typedefs, structures, and compiler characteristics.
-AC_CHECK_TYPES(size_t, , AC_MSG_ERROR(size_t not defined.),
-	[#include <stddef.h>])
-AC_CHECK_TYPES(uint8_t, , AC_MSG_ERROR(uint8_t not defined.),
-	[#include <stdint.h>])
-AC_CHECK_TYPES(uint16_t, , AC_MSG_ERROR(uint16_t not defined.),
-	[#include <stdint.h>])
-AC_CHECK_TYPES(uint32_t, , AC_MSG_ERROR(uint32_t not defined.),
-	[#include <stdint.h>])
-
 AC_CONFIG_LINKS(start/psp2.x:start/psp2.x)
 
 AC_OUTPUT([Doxyfile Makefile include/Makefile start/Makefile stubs/Makefile
