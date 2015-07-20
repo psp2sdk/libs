@@ -3,6 +3,7 @@ OUTPUT_ARCH(arm)
 
 ENTRY(module_info)
 
+module_info = DEFINED(module_info) ? module_info : 0;
 module_start = DEFINED(module_start) ? module_start : 0;
 module_stop = DEFINED(module_stop) ? module_stop : 0;
 
