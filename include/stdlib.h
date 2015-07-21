@@ -73,7 +73,10 @@ int	_EXFUN(__locale_mb_cur_max,(_VOID));
 
 _VOID	_EXFUN(abort,(_VOID) _ATTRIBUTE ((__noreturn__)));
 int	_EXFUN(abs,(int));
-int	_EXFUN(atexit,(_VOID (*__func)(_VOID)));
+int	_EXFUN(__aeabi_atexit,(_VOID (*__func)(_VOID)));
+
+#define atexit(__func) __aeabi_atexit(__func)
+
 double	_EXFUN(atof,(const char *__nptr));
 #ifndef __STRICT_ANSI__
 float	_EXFUN(atoff,(const char *__nptr));
