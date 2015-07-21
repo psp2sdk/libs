@@ -44,20 +44,30 @@ SECTIONS
 		PROVIDE_HIDDEN (__exidx_end = .);
 	} :text
 
+	.init_array :
+	{
+		PROVIDE_HIDDEN (__init_array_start = .);
+		KEEP(*(SORT(.init_array.*)))
+		KEEP(*(.init_array))
+		PROVIDE_HIDDEN (__init_array_end = .);
+	}
+
+	.fini_array :
+	{
+		PROVIDE_HIDDEN (__fini_array_start = .);
+		KEEP(*(SORT(.fini_array.*)))
+		KEEP(*(.fini_array))
+		PROVIDE_HIDDEN (__fini_array_end = .);
+	}
+
 	.ctors :
 	{
-		KEEP(*ctrbegin.o(.ctors))
-		KEEP(*ctrbegin?.o(.ctors))
-		*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .ctors)
 		*(SORT(.ctors.*))
 		*(.ctors)
 	} :text
 
 	.dtors :
 	{
-		KEEP(*crtbegin.o(.dtors))
-		KEEP(*crtbegin?.o(.dtors))
-		*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .dtors)
 		*(SORT(.dtors.*))
 		*(.dtors)
 	} :text
@@ -88,6 +98,9 @@ SECTIONS
 	} :rela
 
 	.rel.rodata : { *(.rel.rodata) } :rela
+
+	.rel.init : { *(.rel.init) } :rela
+	.rel.fini : { *(.rel.fini) } :rela
 
 	.rel.data : { *(.rel.data) } :rela
 
