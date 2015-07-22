@@ -18,7 +18,7 @@ cache:
    - $HOME/devkitPro
 
 before_install:
- - curl -Ls https://download.sourceforge.net/devkitpro/devkitARMupdate.pl | perl
+ - curl -Ls https://download.sourceforge.net/devkitpro/devkitARMupdate.pl | perl; true
 
  - set -e
 
