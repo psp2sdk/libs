@@ -18,9 +18,9 @@ cache:
    - $HOME/devkitPro
 
 before_install:
- - set -e
-
  - curl -Ls https://download.sourceforge.net/devkitpro/devkitARMupdate.pl | perl
+
+ - set -e
 
  - git clone -q --single-branch "https://$TOKEN@github.com/psp2sdk/psp2sdk.github.io" html | sed s/$TOKEN/\${TOKEN}/g
  - git -C html rm -qrf .
