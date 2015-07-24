@@ -6,6 +6,11 @@
 
 #include <psp2/import.S>
 
+#ifdef FUNC
+.eabi_attribute Tag_ABI_VFP_args, 1
+.eabi_attribute Tag_ABI_FP_number_model, 3
+#endif
+
 PSP2_IMPORT_HEAD 0x0, SceLibm, 0001, 1, 0
 
 PSP2_IMPORT_FUNC SceLibm, 0001, F00, 0x0056061b, ldexp
