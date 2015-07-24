@@ -28,7 +28,16 @@ psp2/crt0%O%s
 
 
 *multilib:
-psp2 !mthumb !mfloat-abi=hard;psp2/thumb mthumb !mfloat-abi=hard;psp2/fpu !mthumb mfloat-abi=hard;
+psp2 !mthumb mfloat-abi=softfp;psp2/thumb mthumb mfloat-abi=softfp;psp2/fpu !mthumb !mfloat-abi=softfp;
+
+*multilib_defaults:
+
+
+*multilib_matches:
+mthumb mthumb;mfloat-abi=soft mfloat-abi=softfp;mfloat-abi=softfp mfloat-abi=softfp;
+
+*multilib_options:
+mthumb mfloat-abi=softfp
 
 *path:
 @prefix@
