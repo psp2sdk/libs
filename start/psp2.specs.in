@@ -24,6 +24,9 @@
 *startfile:
 psp2/crt0%O%s
 
+*endfile:
+
+
 *multilib:
 psp2 !mthumb !mfloat-abi=hard;psp2/thumb mthumb !mfloat-abi=hard;psp2/fpu !mthumb mfloat-abi=hard;
 
