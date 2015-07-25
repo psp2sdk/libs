@@ -19,7 +19,7 @@
 --start-group -lSceKernel_stub -lc_stub -lstdc++_stub -lsupc++ -lm_stub --end-group
 
 *cpu:
--mcpu=cortex-a9 -mfpu=neon-fp16 -mfloat-abi=hard
+-mcpu=cortex-a9 -mfpu=neon-fp16 -mfloat-abi=hard -mfp16-format=alternative
 
 *startfile:
 psp2/crt0%O%s
