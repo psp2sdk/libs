@@ -12,8 +12,8 @@ nobase_include_HEADERS = psp2/export.s psp2/import.S	\
 	psp2/kernel/threadmgr.h psp2/audioenc.h psp2/audioin.h psp2/audioout.h	\
 	psp2/appmgr.h psp2/apputil.h psp2/camera.h psp2/ctrl.h psp2/display.h	\
 	psp2/fpu.h psp2/gxm.h psp2/moduleinfo.h psp2/motion.h psp2/pgf.h	\
-	psp2/power.h psp2/rtc.h psp2/screenshot.h psp2/system_param.h	\
-	psp2/touch.h psp2/types.h psp2/pss.h	\
+	psp2/power.h psp2/rtc.h psp2/screenshot.h psp2/sysmodule.h	\
+	psp2/system_param.h psp2/touch.h psp2/types.h psp2/pss.h	\
 	c++/bits/os_defines.h c++/bits/time_members.h c++/bits/c++io.h	\
 	c++/bits/atomic_word.h c++/bits/c++locale.h c++/bits/locale_facets.h	\
 	c++/bits/locale_facets.tcc c++/bits/ctype_base.h c++/bits/stdc++.h	\
