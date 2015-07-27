@@ -53,7 +53,7 @@ typedef const _sceModuleInfo SceModuleInfo;
 #define _PSP2_MODULE_INFO_(attribute, version, module_name)	\
 	__asm__ (".section .sceLib.stub, \"a\", %progbits;");	\
 	SceModuleInfo module_info	\
-		__attribute__((section(".sceModuleInfo.rodata")))	\
+		__attribute__((section(".sceModuleInfo.rodata"), used))	\
 			= { attribute, version,	module_name };
 
 #ifdef __cplusplus
