@@ -5,9 +5,9 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 install-exec-hook: psp2.specs psp2.x
-	$(mkinstalldirs) $(libdir) $(multilibdir)
+	$(mkinstalldirs) $(DESTDIR)$(libdir) $(multilibdir)
 	$(INSTALL_DATA) psp2.specs $(multilibdir)
-	$(INSTALL_DATA) psp2.x $(exec_prefix)
+	$(INSTALL_DATA) psp2.x $(DESTDIR)$(exec_prefix)
 
 uninstall-hook:
-	rm -f $(libdir)/psp2.x
+	rm -f $(DESTDIR)$(libdir)/psp2.x
