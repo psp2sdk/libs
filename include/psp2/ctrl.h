@@ -32,8 +32,8 @@ enum {
 	PSP2_CTRL_RIGHT		= 0x000020,	//!< Right D-Pad button.
 	PSP2_CTRL_DOWN		= 0x000040,	//!< Down D-Pad button.
 	PSP2_CTRL_LEFT		= 0x000080,	//!< Left D-Pad button.
-	PSP2_CTRL_LTRIGGER	= 0x000100,	//!< Left trigger.
-	PSP2_CTRL_RTRIGGER	= 0x000200,	//!< Right trigger.
+	PSP2_CTRL_LTRIGGER	= 0x000500,	//!< Left trigger.
+	PSP2_CTRL_RTRIGGER	= 0x000A00,	//!< Right trigger.
 	PSP2_CTRL_TRIANGLE	= 0x001000,	//!< Triangle button.
 	PSP2_CTRL_CIRCLE	= 0x002000,	//!< Circle button.
 	PSP2_CTRL_CROSS		= 0x004000,	//!< Cross button.

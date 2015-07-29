@@ -20,7 +20,7 @@ extern "C" {
 
 // SCE_TOUCH_MAX_REPORT = 8
 enum {
-	SCE_TOUCH_MAX_REPORT	= 6	//!< FIXME 6 on front | 4 on back
+	SCE_TOUCH_MAX_REPORT	= 8	//!< FIXME 6 on front | 4 on back
 };
 
 /**
