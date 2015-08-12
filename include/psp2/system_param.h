@@ -13,6 +13,7 @@
 #define _PSP2_SYSTEM_PARAM_H_
 
 /* System param id */
+typedef SceUInt32 SceSystemParamId;
 
 enum {
 	//!< Language settings
@@ -38,6 +39,8 @@ enum {
 };
 
 /* Language settings */
+typedef SceInt32 SceSystemParamLang;
+
 enum {
 	PSP2_SYSTEM_PARAM_LANG_JAPANESE,
 	PSP2_SYSTEM_PARAM_LANG_ENGLISH_US,
@@ -68,6 +71,8 @@ enum {
 };
 
 /* Assignment of enter button */
+typedef SceInt32 SceSystemParamEnterButtonAssign;
+
 enum {
 	PSP2_SYSTEM_PARAM_ENTER_BUTTON_CIRCLE,
 	PSP2_SYSTEM_PARAM_ENTER_BUTTON_CROSS
