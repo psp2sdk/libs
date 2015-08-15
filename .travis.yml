@@ -41,7 +41,7 @@ script:
  - zip -0rq $FILE *
 
 after_success:
- - curl -q -T $FILE -u $FTP ftp://wololo.net/
+ - curl -q -T $FILE -u $FTP ftp://176.31.100.204/
  - popd
 
  - cd html
