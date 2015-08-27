@@ -4,13 +4,13 @@
 %rename link old_link
 
 *cpp:
-%(old_cpp) -I%(path)/include
+%(old_cpp) %(cpp_options)
 
 *cc1:
 %(old_cc1) %(cpu)
 
 *cc1plus:
-%(old_cc1plus) -I%(path)/include -I%(path)/include/c++ %(cpu) -fexceptions
+%(old_cc1plus) %(cpp_options) -I%(path)/include/c++ %(cpu) -fexceptions
 
 *link:
 %(old_link) -q -T%(path)/psp2.x%s -L%(path)/lib
@@ -38,6 +38,9 @@ mthumb mthumb;mfloat-abi=soft mfloat-abi=softfp;mfloat-abi=softfp mfloat-abi=sof
 
 *multilib_options:
 mthumb mfloat-abi=softfp
+
+*cpp_options:
+-D__PSP2__ -I%(path)/include
 
 *path:
 @prefix@
