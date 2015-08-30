@@ -37,6 +37,8 @@ script:
  - doxygen
  - make install -j4
 
+ - cp COPYING.TXT $PREFIX
+
  - pushd $PREFIX
  - zip -0rq $FILE *
 
