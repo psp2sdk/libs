@@ -4,6 +4,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+include $(top_srcdir)/stubs/common.mk
+
 PREFIX = _SceNgs-0001_
 ENTRIES_PREFIX = $(PREFIX)F00_
 
@@ -25,18 +27,17 @@ NIDS = 0x01a52e3a 0x0a92e4ec 0x0a93ea96 0x0d5399cf 	\
 	0xe9b572b7 0xed14cf4a 0xf6b68c31 0xf964120e 	\
 	0xfa0a0f34 0xfb8174b1 0xfbe515d4 0xfe1a98e9
 
-ENTRIES = $(addsuffix .o,$(addprefix $(ENTRIES_PREFIX),$(subst 0x,,$(NIDS))))
+ENTRIES = $(call GET_ENTRIES,$(ENTRIES_PREFIX),$(NIDS))
 
 lib_LIBRARIES = libSceNgs_stub.a
 libSceNgs_stub_a_SOURCES = SceNgs_stub.S
-am_libSceNgs_stub_a_OBJECTS =	\
-	$(PREFIX)head.o $(PREFIX)NIDS.o $(ENTRIES)
+am_libSceNgs_stub_a_OBJECTS = $(call GET_OBJECTS,$(PREFIX),$(ENTRIES))
 
 $(PREFIX)head.o: $(libSceNgs_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DHEAD $< -c -o $@
+	$(COMPILE_HEAD)
 
 $(PREFIX)NIDS.o: $(libSceNgs_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DNIDS $< -c -o $@
+	$(COMPILE_NIDS)
 
 $(ENTRIES): $(libSceNgs_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DFUNC=$(subst $(ENTRIES_PREFIX),0x,$*) $< -c -o $@
+	$(call COMPILE_ENTRIES,$(ENTRIES_PREFIX))

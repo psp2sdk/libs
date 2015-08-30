@@ -4,6 +4,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+include $(top_srcdir)/stubs/common.mk
+
 PREFIX = _SceHttp-0001_
 ENTRIES_PREFIX = $(PREFIX)F00_
 
@@ -30,18 +32,17 @@ NIDS = 0x00659635 0x03a6c89e 0x07d9f8bb 0x0daca8d4 	\
 	0xe9c083a5 0xea61662f 0xec85ecfb 0xf0f65c15 	\
 	0xf580d304 0xf71aa58d 0xf98cdfa9
 
-ENTRIES = $(addsuffix .o,$(addprefix $(ENTRIES_PREFIX),$(subst 0x,,$(NIDS))))
+ENTRIES = $(call GET_ENTRIES,$(ENTRIES_PREFIX),$(NIDS))
 
 lib_LIBRARIES = libSceHttp_stub.a
 libSceHttp_stub_a_SOURCES = SceHttp_stub.S
-am_libSceHttp_stub_a_OBJECTS =	\
-	$(PREFIX)head.o $(PREFIX)NIDS.o $(ENTRIES)
+am_libSceHttp_stub_a_OBJECTS = $(call GET_OBJECTS,$(PREFIX),$(ENTRIES))
 
 $(PREFIX)head.o: $(libSceHttp_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DHEAD $< -c -o $@
+	$(COMPILE_HEAD)
 
 $(PREFIX)NIDS.o: $(libSceHttp_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DNIDS $< -c -o $@
+	$(COMPILE_NIDS)
 
 $(ENTRIES): $(libSceHttp_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DFUNC=$(subst $(ENTRIES_PREFIX),0x,$*) $< -c -o $@
+	$(call COMPILE_ENTRIES,$(ENTRIES_PREFIX))

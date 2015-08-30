@@ -4,6 +4,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+include $(top_srcdir)/stubs/common.mk
+
 PREFIX = _SceLibc-0001_
 FENTRIES_PREFIX = $(PREFIX)F00_
 VENTRIES_PREFIX = $(PREFIX)V00_
@@ -102,22 +104,21 @@ VNIDS = 0x01b05132 0x036d0f07 0x116f3da9 0x2a72f684	\
 	0x8a0f308c 0x94ce931c 0xd662e07c 0xddf9bb09	\
 	0xe5620a03 0xf708906e
 
-FENTRIES = $(addsuffix .o,$(addprefix $(FENTRIES_PREFIX),$(subst 0x,,$(FNIDS))))
-VENTRIES = $(addsuffix .o,$(addprefix $(VENTRIES_PREFIX),$(subst 0x,,$(VNIDS))))
+FENTRIES = $(call GET_ENTRIES,$(FENTRIES_PREFIX),$(FNIDS))
+VENTRIES = $(call GET_ENTRIES,$(VENTRIES_PREFIX),$(VNIDS))
 
 lib_LIBRARIES = libc_stub.a
 libc_stub_a_SOURCES = SceLibc_stub.S
-am_libc_stub_a_OBJECTS =	\
-	$(PREFIX)head.o $(PREFIX)NIDS.o $(FENTRIES) $(VENTRIES)
+am_libc_stub_a_OBJECTS = $(GET_OBJECTS,$(PREFIX),$(FENTRIES) $(VENTRIES))
 
 $(PREFIX)head.o: $(libc_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DHEAD $< -c -o $@
+	$(COMPILE_HEAD)
 
 $(PREFIX)NIDS.o: $(libc_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DNIDS $< -c -o $@
+	$(COMPILE_NIDS)
 
 $(FENTRIES): $(libc_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DFUNC=$(subst $(FENTRIES_PREFIX),0x,$*) $< -c -o $@
+	$(call COMPILE_ENTRIES,$(FENTRIES_PREFIX))
 
 $(VENTRIES): $(libc_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DVAR=$(subst $(VENTRIES_PREFIX),0x,$*) $< -c -o $@
+	$(call COMPILE_ENTRIES,$(VENTRIES_PREFIX))

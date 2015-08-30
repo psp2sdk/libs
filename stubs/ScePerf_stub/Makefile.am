@@ -4,6 +4,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+include $(top_srcdir)/stubs/common.mk
+
 PREFIX = _ScePerf-0001_
 ENTRIES_PREFIX = $(PREFIX)F00_
 
@@ -15,18 +17,17 @@ NIDS = 0x0de231d4 0x12f6c708 0x35151735 0x3f29e937 	\
 	0xc3de4c0a 0xc9d969d5 0xd1a40f54 0xdab63fc3 	\
 	0xdc3224c3 0xf7f8adce 0x936a5f31
 
-ENTRIES = $(addsuffix .o,$(addprefix $(ENTRIES_PREFIX),$(subst 0x,,$(NIDS))))
+ENTRIES = $(call GET_ENTRIES,$(ENTRIES_PREFIX),$(NIDS))
 
 lib_LIBRARIES = libScePerf_stub.a
 libScePerf_stub_a_SOURCES = ScePerf_stub.S
-am_libScePerf_stub_a_OBJECTS =	\
-	$(PREFIX)head.o $(PREFIX)NIDS.o $(ENTRIES)
+am_libScePerf_stub_a_OBJECTS = $(call GET_OBJECTS,$(PREFIX),$(ENTRIES))
 
 $(PREFIX)head.o: $(libScePerf_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DHEAD $< -c -o $@
+	$(COMPILE_HEAD)
 
 $(PREFIX)NIDS.o: $(libScePerf_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DNIDS $< -c -o $@
+	$(COMPILE_NIDS)
 
 $(ENTRIES): $(libScePerf_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DFUNC=$(subst $(ENTRIES_PREFIX),0x,$*) $< -c -o $@
+	$(call COMPILE_ENTRIES,$(ENTRIES_PREFIX))

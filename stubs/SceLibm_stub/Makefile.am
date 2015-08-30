@@ -4,6 +4,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+include $(top_srcdir)/stubs/common.mk
+
 PREFIX = _SceLibm-0001_
 ENTRIES_PREFIX = $(PREFIX)F00_
 
@@ -59,18 +61,17 @@ NIDS = 0x0056061b 0x0197c9d5 0x0212323e 0x025f51ce 	\
 	0xf2c0af49 0xfd2a3464 0xfd431619 0xfdfa4558 	\
 	0xff4eae04
 
-ENTRIES = $(addsuffix .o,$(addprefix $(ENTRIES_PREFIX),$(subst 0x,,$(NIDS))))
+ENTRIES = $(call GET_ENTRIES,$(ENTRIES_PREFIX),$(NIDS))
 
 lib_LIBRARIES = libm_stub.a
 libm_stub_a_SOURCES = SceLibm_stub.S
-am_libm_stub_a_OBJECTS =	\
-	$(PREFIX)head.o $(PREFIX)NIDS.o $(ENTRIES)
+am_libm_stub_a_OBJECTS = $(call GET_OBJECTS,$(PREFIX),$(ENTRIES))
 
 $(PREFIX)head.o: $(libm_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DHEAD $< -c -o $@
+	$(COMPILE_HEAD)
 
 $(PREFIX)NIDS.o: $(libm_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DNIDS $< -c -o $@
+	$(COMPILE_NIDS)
 
 $(ENTRIES): $(libm_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DFUNC=$(subst $(ENTRIES_PREFIX),0x,$*) $< -c -o $@
+	$(call COMPILE_ENTRIES,$(ENTRIES_PREFIX))

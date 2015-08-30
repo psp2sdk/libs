@@ -4,6 +4,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+include $(top_srcdir)/stubs/common.mk
+
 PREFIX = _ScePgf-0001_
 ENTRIES_PREFIX = $(PREFIX)F00_
 
@@ -14,18 +16,17 @@ NIDS = 0x03f10ec8 0x07ee1733 0x1055aba3 0x39b9aeff 	\
 	0xb23ed47c 0xbd2dfcff 0xd56dccea 0xde47674c 	\
 	0xe260e740 0xeb589530 0xf9414fa2
 
-ENTRIES = $(addsuffix .o,$(addprefix $(ENTRIES_PREFIX),$(subst 0x,,$(NIDS))))
+ENTRIES = $(call GET_ENTRIES,$(ENTRIES_PREFIX),$(NIDS))
 
 lib_LIBRARIES = libScePgf_stub.a
 libScePgf_stub_a_SOURCES = ScePgf_stub.S
-am_libScePgf_stub_a_OBJECTS =	\
-	$(PREFIX)head.o $(PREFIX)NIDS.o $(ENTRIES)
+am_libScePgf_stub_a_OBJECTS = $(call GET_OBJECTS,$(PREFIX),$(ENTRIES))
 
 $(PREFIX)head.o: $(libScePgf_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DHEAD $< -c -o $@
+	$(COMPILE_HEAD)
 
 $(PREFIX)NIDS.o: $(libScePgf_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DNIDS $< -c -o $@
+	$(COMPILE_NIDS)
 
 $(ENTRIES): $(libScePgf_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DFUNC=$(subst $(ENTRIES_PREFIX),0x,$*) $< -c -o $@
+	$(call COMPILE_ENTRIES,$(ENTRIES_PREFIX))

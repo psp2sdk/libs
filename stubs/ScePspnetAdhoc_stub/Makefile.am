@@ -4,6 +4,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+include $(top_srcdir)/stubs/common.mk
+
 PREFIX = _ScePspnetAdhoc-0001_
 ENTRIES_PREFIX = $(PREFIX)F00_
 
@@ -15,18 +17,17 @@ NIDS = 0x02098b69 0x0291ef5b 0x051d8368 0x0a0423dd 	\
 	0xb56238ba 0xb7b6a662 0xca249f53 0xd3230114 	\
 	0xe2fe9dd6 0xe45f0801 0xf2ec12cd 0xfca965f6
 
-ENTRIES = $(addsuffix .o,$(addprefix $(ENTRIES_PREFIX),$(subst 0x,,$(NIDS))))
+ENTRIES = $(call GET_ENTRIES,$(ENTRIES_PREFIX),$(NIDS))
 
 lib_LIBRARIES = libScePspnetAdhoc_stub.a
 libScePspnetAdhoc_stub_a_SOURCES = ScePspnetAdhoc_stub.S
-am_libScePspnetAdhoc_stub_a_OBJECTS =	\
-	$(PREFIX)head.o $(PREFIX)NIDS.o $(ENTRIES)
+am_libScePspnetAdhoc_stub_a_OBJECTS = $(call GET_OBJECTS,$(PREFIX),$(ENTRIES))
 
 $(PREFIX)head.o: $(libScePspnetAdhoc_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DHEAD $< -c -o $@
+	$(COMPILE_HEAD)
 
 $(PREFIX)NIDS.o: $(libScePspnetAdhoc_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DNIDS $< -c -o $@
+	$(COMPILE_NIDS)
 
 $(ENTRIES): $(libScePspnetAdhoc_stub_a_SOURCES)
-	$(AM_V_CC)$(COMPILE) -DFUNC=$(subst $(ENTRIES_PREFIX),0x,$*) $< -c -o $@
+	$(call COMPILE_ENTRIES,$(ENTRIES_PREFIX))

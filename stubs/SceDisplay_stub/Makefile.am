@@ -4,6 +4,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+include $(top_srcdir)/stubs/common.mk
+
 DISPLAY_PREFIX = _SceDisplay-0001_
 DISPLAY_ENTRIES_PREFIX = $(DISPLAY_PREFIX)F00_
 
@@ -16,30 +18,29 @@ DISPLAY_NIDS = 0x05f27764 0x3e796ef5 0x5795e898 0x6bdf4c4d	\
 
 DISPLAYUSER_NIDS = 0x42ae6bbc 0x7a410b64
 
-DISPLAY_ENTRIES = $(addsuffix .o,$(addprefix $(DISPLAY_ENTRIES_PREFIX),$(subst 0x,,$(DISPLAY_NIDS))))
-DISPLAYUSER_ENTRIES = $(addsuffix .o,$(addprefix $(DISPLAYUSER_ENTRIES_PREFIX),$(subst 0x,,$(DISPLAYUSER_NIDS))))
+DISPLAY_ENTRIES = $(call GET_ENTRIES,$(DISPLAY_ENTRIES_PREFIX),$(DISPLAY_NIDS))
+DISPLAYUSER_ENTRIES = $(call GET_ENTRIES,$(DISPLAYUSER_ENTRIES_PREFIX),$(DISPLAYUSER_NIDS))
 
 lib_LIBRARIES = libSceDisplay_stub.a
 libSceDisplay_stub_a_SOURCES = SceDisplay_stub.S SceDisplayUser_stub.S
 am_libSceDisplay_stub_a_OBJECTS =	\
-	$(DISPLAY_PREFIX)head.o $(DISPLAYUSER_PREFIX)head.o	\
-	$(DISPLAY_PREFIX)NIDS.o $(DISPLAYUSER_PREFIX)NIDS.o	\
-	$(DISPLAY_ENTRIES) $(DISPLAYUSER_ENTRIES)
+	$(call GET_OBJECTS,$(DISPLAY_PREFIX),$(DISPLAY_ENTRIES))	\
+	$(call GET_OBJECTS,$(DISPLAYUSER_PREFIX),$(DISPLAYUSER_ENTRIES))
 
 $(DISPLAY_PREFIX)head.o: SceDisplay_stub.S
-	$(AM_V_CC)$(COMPILE) -DHEAD $< -c -o $@
+	$(COMPILE_HEAD)
 
 $(DISPLAY_PREFIX)NIDS.o: SceDisplay_stub.S
-	$(AM_V_CC)$(COMPILE) -DNIDS $< -c -o $@
+	$(COMPILE_NIDS)
 
 $(DISPLAY_ENTRIES): SceDisplay_stub.S
-	$(AM_V_CC)$(COMPILE) -DFUNC=$(subst $(DISPLAY_ENTRIES_PREFIX),0x,$*) $< -c -o $@
+	$(call COMPILE_ENTRIES,$(DISPLAY_ENTRIES_PREFIX))
 
 $(DISPLAYUSER_PREFIX)head.o: SceDisplayUser_stub.S
-	$(AM_V_CC)$(COMPILE) -DHEAD $< -c -o $@
+	$(COMPILE_HEAD)
 
 $(DISPLAYUSER_PREFIX)NIDS.o: SceDisplayUser_stub.S
-	$(AM_V_CC)$(COMPILE) -DNIDS $< -c -o $@
+	$(COMPILE_NIDS)
 
 $(DISPLAYUSER_ENTRIES): SceDisplayUser_stub.S
-	$(AM_V_CC)$(COMPILE) -DFUNC=$(subst $(DISPLAYUSER_ENTRIES_PREFIX),0x,$*) $< -c -o $@
+	$(call COMPILE_ENTRIES,$(DISPLAYUSER_ENTRIES_PREFIX))
