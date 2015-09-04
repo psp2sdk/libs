@@ -16,7 +16,7 @@
 %(old_link) -q -T%(path)/psp2.x%s -L%(path)/lib
 
 *lib:
---start-group -lSceKernel_stub -lc_stub -lstdc++_stub -lsupc++ -lm_stub --end-group
+-lSceKernel_stub -lc_stub -lstdc++_stub -lsupc++ -lm_stub
 
 *cpu:
 -mcpu=cortex-a9 -mfpu=neon-fp16 -mfloat-abi=hard -mfp16-format=alternative
