@@ -109,7 +109,7 @@ VENTRIES = $(call GET_ENTRIES,$(VENTRIES_PREFIX),$(VNIDS))
 
 lib_LIBRARIES = libc_stub.a
 libc_stub_a_SOURCES = SceLibc_stub.S
-am_libc_stub_a_OBJECTS = $(GET_OBJECTS,$(PREFIX),$(FENTRIES) $(VENTRIES))
+am_libc_stub_a_OBJECTS = $(call GET_OBJECTS,$(PREFIX),$(FENTRIES) $(VENTRIES))
 
 $(PREFIX)head.o: $(libc_stub_a_SOURCES)
 	$(COMPILE_HEAD)
