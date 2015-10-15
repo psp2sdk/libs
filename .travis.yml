@@ -22,13 +22,13 @@ before_install:
 
  - set -e
 
+ - git clone -q --single-branch -b all "https://$TOKEN@github.com/psp2sdk/psp2sdk.git" $DIST | sed s/$TOKEN/\${TOKEN}/g
+ - git -C $DIST rm -qrf psp2sdk
+
  - git clone -q --single-branch "https://$TOKEN@github.com/psp2sdk/psp2sdk.github.io" html | sed s/$TOKEN/\${TOKEN}/g
  - git -C html rm -qrf .
 
 script:
- - export REV=dirty-$(git describe --always)
- - export FILE=psp2-libs-$REV.zip
-
  - aclocal
  - automake --add-missing
  - autoconf
@@ -37,19 +37,19 @@ script:
  - doxygen
  - make install -j4
 
- - cp COPYING.TXT $PREFIX
-
- - pushd $PREFIX
- - zip -0rq $FILE *
-
 after_success:
- - curl -q -T $FILE -u $FTP ftp://176.31.100.204/
+ - export REV=dirty-$(git describe --always)
+ - git config --global user.name "Travis CI"
+ - git config --global user.email contact@travis-ci.com
+
+ - pushd $DIST
+ - git add -f psp2sdk
+ - git commit -qam "libs $REV"
+ - git push -q origin | sed s/$TOKEN/\${TOKEN}/g
  - popd
 
  - cd html
  - git add -f .
- - git config user.name "Travis CI"
- - git config user.email contact@travis-ci.com
  - git commit -qam $REV
  - git push -q origin | sed s/$TOKEN/\${TOKEN}/g
 
@@ -58,6 +58,6 @@ env:
   - DEVKITPRO="$HOME/devkitPro"
   - DEVKITARM="$DEVKITPRO/devkitARM"
   - PATH="$PATH:$DEVKITARM/bin"
-  - PREFIX="$PWD/dist"
-  - secure: "kq7O++vhNMeoQ+u8eZLk0aRqrKTgHZQnkvgNm+H8/2Ar9R8+wN6SjxT3aRuYL9NX7Bo0UXZMCsTrNTwpRswhwhASk2YUS6jNElKUBJmAVn5NEBdXRGNiJ1xINCd69PCtxLiSpXG5kFcdmYJRbJgNiSlrvwoJVkVwMfzjbch2GEq2tGuaV7jNCNTptk87fgjLqzDLXuEg0qwPCDKy/LW2Biw1dTdgOr3xK4qphhT4UtmOwMOPEOwkfU3S978SFxcZPUKBNei1nJEnfPlYqNuTjROcUdY4nVxmdWanA9OdxZSQY1n5f+4hkmwRXzR92JWLWmP+7kLnKGHoMPFMwKLonxyVuJgc53h4yQ4UtsybiQulA+CniT9nTkMI7/gQQXQejIbnmKVcpDAzcIDukr+ww0AxjCjvrLKlMJOOAbT/ecIdvHZ9brAH0sbE1IYVx7rENh5itE/kbbivlAm/6OaZFYpM2n6YRUf1KLzAKX482TUH+niJbKSffZD8iKxc73a91tM+SyduEsWbNUPzNK4RRnLsA3234cM26ErqnuOyWuflKyzrUWX6cAM9CkC8nNXJDSQZ3XGyI/UaBmvYPBby6XM4qXnQh0Hr7E62ZAoXxLeFsDHeze5SJIxKkZWz+dZbUaT2a1HvE4NtwkRE6vPYnz/DnXgcLMcB/CmozUR53sc="
-  - secure: "PO248xZbwOlZuJ46dOwlzJ50p8gLO8iQBpfnsfih5uRfXAx2swff9oMf2R/TDvznA3MCrcXWLz1kCh83Bqr7JPkslYSDDCxtA+kPvEoIzXabm+DdutaXobkcjpjHPf4OA/klg/KBCO+JkYZCK7vjacTV44RAxt9UtuImJNUN52ji6VMCb4LYXmfF+m+xjmGVd5nux9IJQb+r1i5TffoaZHVMkqNV3ZV6qynQPCJNGlWAJsMcVvQIvJX3DGvFMXDsMwmlm2nK/cvzt+LkIDzP1P6hNEtSxIYW5/uNpnVzK9kuCFvXoJ8yIAIn4XI8M7iOXDahGG2ONvWro3XwT9zNcvyKKTkLpB1bfAFIDKPOV7W5pZoOIyNl0Vuu4QG/ITGQxfz71CzknV0NhrhBGoQrWpIbXozPzHhRl1OBogpYOjKKOb3JWBV0mgly9x3Xy8Ey9fYjIMJRxBjqg9zL+WXcFfM/PGcxlRL1jc7AbeiEMy3zgYMwUL/JTmwngm9cq1uJx5DOkMMeHMkt/3FRv5O+DHZGHeAXIvekQ0dDwUZrh2HbYLRWPqr/XjSIWMPpMcHT8gmJvAvPbx3YQISrd0kpZ8bDG1GixGAXyQs9kMpHPRFcWNGrzgV+OVgqyFCPrlqIADcV28hRcMDTfU2aPE41jN4++GMkcmYsXYq59UUx8p4="
+  - DIST="$PWD/dist"
+  - PREFIX="$DIST/psp2sdk"
+  - secure: "m0cIefqSHyWzUpBVAXom0nJfj9/uK6S3U8rNtPgH+slybncLd0WpyOHjiarDypIuIEksBd75DwuIpDSXa6fgldOJbQp3d7VuyfvAxW/j/Nf+4Diih/INrwF8GeQgWVkpkGrge7YomiJdXQjW9bd0CEJhtuA309Z2VkIJSXfxGDNJSEgmvObQbNptKLsoz/C9u5IW2eH892SDiltUomEFmIEntElJK00bJjfymHecsnbJtScw0okk2fzvr3CU3TkGjRYp7h4NRVHjhQYgiadNElc2yc0UUEFvqvq2uFj3dGT7ro/u6YdRVsQf2ej7TJwHdwmTmh5BOS3w9unbUpZ+PvfdKUSuuJezC8juDL4AoEJr9vgncS6CBdlwIcN1pj/b0EPueI1PaIXGaLDDMzjfuDcJ2TxPpH6J9hGluShkuXG84NrKjcxvziPWvp9XIEascyd9t3bLc+1ds9uVz5dy2kLyUsQ3cz6aiMN+9B3vRZmqKfvvgENw70sC4ZDDztqxr5a7QRbiJHI6LlI2D7QceJ8ZL2u+AUnEq3pZQEXuj+SWXoVx4IzoLzKQi6ecvHf3r7A3eHRh5O7SfLMuJWBSEoCFNmfpTcZAquSYZcABPw5zmXGDEiRQTnRadXn0d6VXEOz6MgiFLfuPNHAnPc57PqJ8d6TOPsC4oz034zALn84="
